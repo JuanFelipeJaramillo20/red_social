@@ -120,7 +120,7 @@ public class UserService {
 
         User user = userOpt.get();
         String resetToken = TokenUtil.generateToken();
-        LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(30); // Token valid for 30 min
+        LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(30);
 
         user.setResetToken(resetToken);
         user.setResetTokenExpiry(expiryTime);

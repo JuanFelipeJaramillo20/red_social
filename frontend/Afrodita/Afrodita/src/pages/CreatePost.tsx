@@ -28,7 +28,7 @@ export default function CreatePost() {
     setLoading(true);
     try {
       await createPost(content, imageUrl || null);
-      navigate("/profile"); // Redirect to profile after posting
+      navigate("/profile");
     } catch (err) {
       setError("Hubo un error al publicar el post.");
     } finally {
@@ -43,7 +43,6 @@ export default function CreatePost() {
         {error && <p className="text-red-500 text-center">{error}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Post Content */}
           <div>
             <Label htmlFor="content">Contenido</Label>
             <Textarea
@@ -56,7 +55,6 @@ export default function CreatePost() {
             />
           </div>
 
-          {/* Image URL (Optional) */}
           <div>
             <Label htmlFor="imageUrl">Imagen (opcional)</Label>
             <Input
@@ -67,19 +65,16 @@ export default function CreatePost() {
             />
           </div>
 
-          {/* Image Preview */}
           {imageUrl && (
             <div className="mt-2 w-full h-48 overflow-hidden rounded-lg">
               <img src={imageUrl} alt="Post Preview" className="w-full h-full object-cover" />
             </div>
           )}
 
-          {/* Submit Button */}
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? "Publicando..." : "Publicar"}
           </Button>
 
-          {/* Loading State */}
           {loading && <Skeleton className="w-full h-8 mt-2" />}
         </form>
       </Card>

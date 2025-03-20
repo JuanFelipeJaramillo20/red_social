@@ -168,7 +168,7 @@ public class PostService {
                 post.getCreatedBy(),
                 post.getCreatedAt(),
                 post.getUpdatedAt(),
-                true, // ✅ Since these are liked posts, always true
+                true,
                 likeRepository.countLikesByPostId(post.getId())
         ));
     }
@@ -182,7 +182,7 @@ public class PostService {
         if (principal instanceof UserDetails userDetails) {
             return userDetails.getUsername();
         }
-        return null; // Return null if user is not authenticated
+        return null;
     }
 
     /**

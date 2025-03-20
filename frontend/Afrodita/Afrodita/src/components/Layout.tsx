@@ -15,14 +15,11 @@ export default function Layout() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Navigation Bar */}
       <nav className="bg-white shadow-md p-4 flex justify-between items-center">
-        {/* Logo / App Name */}
         <Link to="/feed" className="text-lg font-bold">
           Afrodita
         </Link>
 
-        {/* Navigation Links */}
         <NavigationMenu>
           <NavigationMenuList className="flex gap-4">
           <NavigationMenuItem>
@@ -46,7 +43,6 @@ export default function Layout() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              {/* Logout Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="destructive">Salir</Button>

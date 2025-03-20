@@ -13,7 +13,7 @@ interface PostProps {
     userAvatar?: string;
     isOwner: boolean;
     likedByUser: boolean;
-    likeCount: number; // ✅ New field
+    likeCount: number;
   }  
 
   export default function PostCard({
@@ -25,21 +25,21 @@ interface PostProps {
     userAvatar,
     isOwner,
     likedByUser,
-    likeCount, // ✅ Include like count
+    likeCount,
   }: PostProps) {
     const { deletePost, likePost } = usePostsStore();
     const [liked, setLiked] = useState(likedByUser);
-    const [likes, setLikes] = useState(likeCount); // ✅ Use `likeCount`
+    const [likes, setLikes] = useState(likeCount);
   
     useEffect(() => {
       setLiked(likedByUser);
-      setLikes(likeCount); // ✅ Update count when reloading
+      setLikes(likeCount);
     }, [likedByUser, likeCount]);
   
     const handleLike = async () => {
       await likePost(id);
       setLiked(!liked);
-      setLikes((prev) => (liked ? prev - 1 : prev + 1)); // ✅ Update count
+      setLikes((prev) => (liked ? prev - 1 : prev + 1));
     };
   
     return (
@@ -63,10 +63,9 @@ interface PostProps {
 
         <p className="mt-3 text-gray-900">{content}</p>
   
-        {/* Actions */}
         <div className="flex justify-between mt-3">
           <Button onClick={handleLike} variant={liked ? "secondary" : "outline"}>
-            {liked ? "❤️ Liked" : "🤍 Like"} ({likes}) {/* ✅ Display like count */}
+            {liked ? "❤️ Liked" : "🤍 Like"} ({likes})
           </Button>
   
           {isOwner && (

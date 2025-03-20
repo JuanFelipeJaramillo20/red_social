@@ -11,13 +11,15 @@ interface Post {
   userAvatar?: string;
   likedByUser: boolean;
   likeCount: number;
+  createdBy: string;
+  liked?: boolean;
 }
 
 interface PostsState {
   posts: Post[];
   fetchPosts: () => Promise<void>;
-  likedPosts: Post[]; // ✅ Add liked posts
-  fetchLikedPosts: () => Promise<void>; // ✅ New function
+  likedPosts: Post[];
+  fetchLikedPosts: () => Promise<void>;
   createPost: (content: string, imageUrl?: string) => Promise<void>;
   deletePost: (postId: number) => Promise<void>;
   likePost: (postId: number) => Promise<void>;
@@ -26,7 +28,7 @@ interface PostsState {
 
 export const usePostsStore = create<PostsState>((set) => ({
   posts: [],
-  likedPosts: [], // ✅ Initialize liked posts
+  likedPosts: [],
 
   fetchLikedPosts: async () => {
     try {
@@ -129,7 +131,6 @@ export const usePostsStore = create<PostsState>((set) => ({
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    // ✅ Get user from authStore
     const user = useAuthStore.getState().user;
     if (!user) return;
 

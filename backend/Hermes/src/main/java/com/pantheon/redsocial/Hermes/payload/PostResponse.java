@@ -9,8 +9,8 @@ public class PostResponse {
     private String createdBy;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private long likeCount; // ✅ Add this
-    private boolean likedByUser; // ✅ New field
+    private long likeCount;
+    private boolean likedByUser;
 
     public PostResponse(Long id, String content, String imageUrl, String createdBy,
                         LocalDateTime createdAt, LocalDateTime updatedAt, boolean likedByUser, Long likeCount) {

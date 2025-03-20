@@ -16,6 +16,7 @@ interface Post {
   content: string;
   imageUrl: string | null;
   createdAt: string;
+  createdBy: string;
 }
 
 interface AuthState {
@@ -25,7 +26,7 @@ interface AuthState {
   login: (username: string, password: string) => Promise<void>;
   fetchUser: () => Promise<void>;
   logout: () => void;
-  updateProfile: (profileData: { fullName: string; avatarUrl: string }) => Promise<void>; // ✅ Corrected type
+  updateProfile: (profileData: { fullName: string; avatarUrl: string }) => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>((set, get) => ({
@@ -88,7 +89,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       if (response.status === 200) {
         set((state) => ({
           user: {
-            ...state.user!, // ✅ Ensure all existing properties are retained
+            ...state.user!,
             fullName: profileData.fullName,
             avatarUrl: profileData.avatarUrl,
           },

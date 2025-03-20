@@ -18,7 +18,7 @@ export default function EditProfileModal({ isOpen, onClose }: EditProfileModalPr
   const handleSave = async () => {
     try {
       await updateProfile({ fullName, avatarUrl });
-      onClose(); // Close modal after successful update
+      onClose();
     } catch (error) {
       console.error("Failed to update profile", error);
     }

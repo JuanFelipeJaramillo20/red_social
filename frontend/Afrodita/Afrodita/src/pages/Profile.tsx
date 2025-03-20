@@ -12,7 +12,7 @@ export default function Profile() {
   const { user, fetchUser } = useAuthStore();
   const { posts, fetchUserPosts } = usePostsStore();
   const [loading, setLoading] = useState(true);
-  const [isEditing, setIsEditing] = useState(false); // ✅ State for modal visibility
+  const [isEditing, setIsEditing] = useState(false);}
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -45,7 +45,6 @@ export default function Profile() {
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100">
-      {/* User Info Card */}
       <Card className="w-[600px] p-6 shadow-lg rounded-lg bg-white mb-6">
         <div className="flex flex-col items-center">
           <Avatar className="w-24 h-24 mb-4">
@@ -62,7 +61,6 @@ export default function Profile() {
           {user?.updatedAt && <p><strong>Última actualización:</strong> {new Date(user.updatedAt).toLocaleDateString()}</p>}
         </div>
 
-        {/* Edit Profile Button */}
         <div className="mt-4 flex justify-center">
           <Button variant="secondary" onClick={() => setIsEditing(true)}>
             ✏️ Editar Perfil
@@ -72,7 +70,6 @@ export default function Profile() {
 
       <EditProfileModal isOpen={isEditing} onClose={() => setIsEditing(false)} />
 
-      {/* User Posts */}
       <div className="w-full max-w-8xl px-4">
         <h2 className="text-lg font-semibold mb-10">Publicaciones</h2>
 
@@ -91,8 +88,8 @@ export default function Profile() {
                   username={post.createdBy}
                   userAvatar={user?.avatarUrl}
                   isOwner={post.createdBy === user?.username}
-                  likedByUser={post.likedByUser} // ✅ Fix: Pass the likedByUser value
-                  likeCount={post.likeCount} // ✅ Fix: Pass the likeCount value
+                  likedByUser={post.likedByUser}
+                  likeCount={post.likeCount}
                 />
               ))}
           </div>
