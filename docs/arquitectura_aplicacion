@@ -1,0 +1,29 @@
+// Arquitectura de la Aplicación
+digraph {
+	A [label="Cliente
+(Web Browser/App)"]
+	B [label="Frontend
+(Angular)
+- Login
+- Perfil
+- Publicaciones y Likes"]
+	C [label="API Gateway
+(JWT)"]
+	D [label="Microservicio de Usuarios
+(CRUD y Autenticación)"]
+	E [label="Microservicio de Publicaciones
+(Creación y Likes)"]
+	F [label="PostgreSQL
+(Base de Datos)"]
+	G [label="Docker Compose
+(Orquestación de Contenedores)"]
+	A -> B [label="Acceso a la app"]
+	B -> C [label="Envía peticiones (JWT)"]
+	C -> D [label="Ruteo de solicitudes"]
+	C -> E [label="Ruteo de solicitudes"]
+	D -> F [label="Operaciones CRUD"]
+	E -> F [label="Gestión de publicaciones y likes"]
+	G -> D [label=Contenedor]
+	G -> E [label=Contenedor]
+	G -> F [label=Contenedor]
+}

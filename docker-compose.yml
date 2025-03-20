@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: red_social
+      POSTGRES_USER: pandora
+      POSTGRES_PASSWORD: temistocles
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # atenea:
+  #   build:
+  #     context: ./backend/Atenea
+  #     dockerfile: ./docker/Dockerfile-Atenea
+  #   ports:
+  #     - "8081:8081"
+  #   depends_on:
+  #     - postgres
+
+  # hermes:
+  #   build:
+  #     context: ./backend/Hermes
+  #     dockerfile: ./docker/Dockerfile-Hermes
+  #   ports:
+  #     - "8082:8082"
+  #   depends_on:
+  #     - postgres
+
+  # frontend:
+  #   build:
+  #     context: ./frontend/Afrodita
+  #   ports:
+  #     - "4200:80"
+  #   depends_on:
+  #     - atenea
+  #     - hermes
+
+volumes:
+  pgdata:
+
