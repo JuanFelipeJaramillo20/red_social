@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
-import { useAuthStore } from "./authStore"; // ✅ Import auth store
+import { useAuthStore } from "./authStore";
 
 interface Post {
   id: number;
@@ -26,6 +26,8 @@ interface PostsState {
   fetchUserPosts: () => Promise<void>;
 }
 
+const HERMES_URL = import.meta.env.VITE_HERMES_URL || "http://localhost:8081";
+
 export const usePostsStore = create<PostsState>((set) => ({
   posts: [],
   likedPosts: [],
@@ -35,7 +37,7 @@ export const usePostsStore = create<PostsState>((set) => ({
       const token = localStorage.getItem("token");
       if (!token) return;
 
-      const response = await axios.get("http://localhost:8081/api/posts/liked", {
+      const response = await axios.get(`${HERMES_URL}/api/posts/liked`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -52,7 +54,7 @@ export const usePostsStore = create<PostsState>((set) => ({
       const token = localStorage.getItem("token");
       if (!token) return;
   
-      const response = await axios.get("http://localhost:8081/api/posts/all", {
+      const response = await axios.get(`${HERMES_URL}/api/posts/all`, {
         headers: { Authorization: `Bearer ${token}` },
         params: { page: 0, size: 10 },
       });
@@ -71,7 +73,7 @@ export const usePostsStore = create<PostsState>((set) => ({
       if (!token) throw new Error("No token available");
 
       const response = await axios.post(
-        "http://localhost:8081/api/posts/create",
+        `${HERMES_URL}/api/posts/create`,
         { content, imageUrl },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -92,7 +94,7 @@ export const usePostsStore = create<PostsState>((set) => ({
       if (!token) throw new Error("No token available");
 
       const response = await axios.delete(
-        `http://localhost:8081/api/posts/${postId}`,
+        `${HERMES_URL}/api/posts/${postId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -112,7 +114,7 @@ export const usePostsStore = create<PostsState>((set) => ({
       if (!token) throw new Error("No token available");
 
       await axios.post(
-        `http://localhost:8081/api/likes/${postId}`,
+        `${HERMES_URL}/api/likes/${postId}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -135,7 +137,7 @@ export const usePostsStore = create<PostsState>((set) => ({
     if (!user) return;
 
     try {
-      const response = await axios.get(`http://localhost:8081/api/posts/user/${user.username}`, {
+      const response = await axios.get(`${HERMES_URL}/api/posts/user/${user.username}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

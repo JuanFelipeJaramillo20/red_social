@@ -29,6 +29,8 @@ interface AuthState {
   updateProfile: (profileData: { fullName: string; avatarUrl: string }) => Promise<void>;
 }
 
+const ATENEA_URL = import.meta.env.VITE_ATENEA_URL || "http://localhost:8080";
+
 export const useAuthStore = create<AuthState>((set, get) => ({
   token: localStorage.getItem("token") || null,
   user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")!) : null,
@@ -36,13 +38,13 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   login: async (username, password) => {
     try {
-      const response = await axios.post("http://localhost:8081/api/auth/login", {
+      const response = await axios.post(`${ATENEA_URL}/api/auth/login`, {
         username,
         password,
       });
 
-      if (response.status === 200 && response.data.token) {
-        const token = response.data.token;
+      if (response.status === 200 && response.data.accessToken) {
+        const token = response.data.accessToken;
         localStorage.setItem("token", token);
         set({ token });
 
@@ -59,7 +61,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     if (!token) return;
 
     try {
-      const response = await axios.get("http://localhost:8080/api/users/me", {
+      const response = await axios.get(`${ATENEA_URL}/api/users/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -77,15 +79,16 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     localStorage.removeItem("user");
     set({ token: null, user: null, posts: [] });
   },
+
   updateProfile: async (profileData) => {
     try {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No token available");
-  
-      const response = await axios.put("http://localhost:8080/api/users/me", profileData, {
+
+      const response = await axios.put(`${ATENEA_URL}/api/users/me`, profileData, {
         headers: { Authorization: `Bearer ${token}` },
       });
-  
+
       if (response.status === 200) {
         set((state) => ({
           user: {
@@ -98,5 +101,5 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     } catch (error) {
       console.error("❌ Failed to update profile:", error);
     }
-  }  
+  }
 }));

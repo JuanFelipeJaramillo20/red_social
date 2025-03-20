@@ -12,7 +12,7 @@ export default function Profile() {
   const { user, fetchUser } = useAuthStore();
   const { posts, fetchUserPosts } = usePostsStore();
   const [loading, setLoading] = useState(true);
-  const [isEditing, setIsEditing] = useState(false);}
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     const loadUserData = async () => {
