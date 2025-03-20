@@ -1,0 +1,80 @@
+# 🚀 Global Ignore for the Project (Atenea, Hermes, Afrodita)
+
+# ----------------------
+# 🟢 Java (Atenea & Hermes)
+# ----------------------
+*.class
+*.jar
+*.war
+*.ear
+*.iml
+*.log
+hs_err_pid*
+!src/main/resources/application.properties
+target/
+bin/
+out/
+.mvn/
+.m2/
+.idea/
+.vscode/
+
+# Gradle
+.gradle/
+build/
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# ----------------------
+# 🔵 Node.js & React (Afrodita)
+# ----------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+build/
+.DS_Store
+.env
+.env.local
+.env.development
+.env.production
+.next/
+out/
+.npm/
+.pnp/
+.pnp.js
+
+# ----------------------
+# 🟠 Docker
+# ----------------------
+docker-compose.override.yml
+*.container
+.dockerignore
+
+# ----------------------
+# 🟣 IDE / OS-specific Files
+# ----------------------
+.vscode/
+.idea/
+*.swp
+*~
+Thumbs.db
+.DS_Store
+
+# ----------------------
+# 🟡 Logs & Temporary Files
+# ----------------------
+logs/
+*.log
+*.pid
+*.seed
+*.pid.lock
+dump.rdb
+node_modules/.cache
+
+# ----------------------
+# 🔴 Git Ignore Override (Keep Config Files)
+# ----------------------
+!src/main/resources/application.properties
+
